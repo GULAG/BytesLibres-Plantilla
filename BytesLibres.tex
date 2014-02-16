@@ -1,0 +1,420 @@
+%    BytesLibres.tex is free software: you can redistribute it and/or modify
+%    it under the terms of the GNU General Public License as published by
+%    the Free Software Foundation, either version 3 of the License, or
+%    (at your option) any later version.
+%
+%    BytesLibres.tex is distributed in the hope that it will be useful,
+%    but WITHOUT ANY WARRANTY; without even the implied warranty of
+%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%    GNU General Public License for more details.
+%
+%    You should have received a copy of the GNU General Public License
+%    along with BytesLibres.tex  If not, see <http://www.gnu.org/licenses/>.
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+%    Name: 		BytesLibres.tex
+%    Date:  		12-January-2014
+%    Author:  		jm@taquinux.com
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\documentclass[12pt]{report}
+
+% LaTeX Packages
+\usepackage{amsmath}										% Math symbols
+\usepackage{setspace}									% Interline space
+\usepackage[normalem]{ulem}							% Underline options
+\usepackage{longtable}									% Tables that span more than a page
+\usepackage[usenames, dvipsnames]{color}			% Named colors
+\usepackage[utf8x]{inputenc}							% Spanish characters
+\usepackage{graphics}									% Add support for additional image formats
+\usepackage[pdftex]{graphicx}							% Add support for additional image formats
+\usepackage[OT1]{fontenc}								% Add support for additional fonts
+\usepackage{multicol}									% Multi-column
+\usepackage{pifont}										% Symbols
+\usepackage{lastpage}									% Page counter
+\usepackage{caption}										% Change format of 'caption'
+\usepackage{natbib}
+\usepackage{hyperref}									% Redefine links
+\usepackage{listing}										% Formating the code command
+\usepackage{eso-pic}										% Fullpage images
+\usepackage{xparse}										% Command overloading
+\hypersetup
+{
+	pdftex,%
+	colorlinks=true,%
+	linkcolor=black,%
+	urlcolor=blue,%
+	citecolor=blue,
+	filecolor=blue											% Change link's color
+}
+\usepackage[table]{xcolor}								% Change color on tables
+\usepackage{titlesec}									% Change font for sections
+\usepackage[spanish]{babel}							% Change languaje to spanish
+
+% % % TABLE OF CONTENTS
+\makeatletter
+\renewcommand\tableofcontents[2]{
+	\begin{minipage}{0.9\columnwidth}
+		\begin{center}
+		\includegraphics[height=#2]{#1}\\
+		\normalfont
+		\end{center}
+	\end{minipage}		
+
+	\vspace{-#2}
+	\vspace{2.0cm}
+
+	\normalfont
+	\hspace{.4\textwidth}								% Initial space for text
+	\vspace{-1.25cm}
+	\begin{spacing}{0.85}
+
+		\color{titleBarColor} \centering \rule{0.5\textwidth}{2pt} \vspace{0.0cm}
+            
+		% Title
+		\vspace{0.5cm}
+		\parbox[t]{0.75 \textwidth} { \centering \fontsize{38}{0} \usefont{OT1}{phv}{b}{n} \color{titleTextColor}{Contenido}% 				
+      								\vspace{0.5cm}}
+		\normalfont
+		\color{titleBarColor} \centering \rule{0.5\textwidth}{2pt}
+		\normalfont         
+	\end{spacing}
+	\textnormal{}
+	\\*
+
+	\begin{multicols}{2}        
+	\@starttoc{toc}
+	\end{multicols}
+	
+}
+\makeatother
+
+% % % PAGE SIZE AND BORDERS
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm, paperwidth=8.5in, paperheight=11in]{geometry}
+
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+% % % Numbers for index
+% Numeration depth in the document
+\setcounter{secnumdepth}{-1}
+% Numeration depth in the table of contents
+\setcounter{tocdepth}{3}	
+
+\usepackage{alltt}									% Monospace text on 'code'
+\usepackage{ragged2e}								% Enable justified text
+\usepackage[normalem]{ulem}						% Tachado de texto
+
+\usepackage{natbib}
+\usepackage{tikz}																	% Drawings
+\usetikzlibrary{positioning,decorations.pathreplacing}				% Symbols for diagrams
+\usetikzlibrary{shapes,arrows}												% Arrows for diagrams
+% State diagram blocks
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 						
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
+\captionsetup[figure]{labelfont=bf,textfont=normalfont}
+
+% % % FRONT PAGE CONFIGURATION
+\definecolor{TitleColor3}{RGB}{0,0,0}
+\definecolor{TitleColor2}{RGB}{0,0,127}
+\definecolor{TitleColor1}{RGB}{0,0,255}
+
+% 1 - Title
+% 2 - Second title
+% 3 - Main title
+% 4 - Author A
+% 5 - Author B
+% 6 - Date
+\newcommand{\BytesLibres}[6]
+{
+\begin{titlepage}
+	\begin{center}
+		\begin{minipage}{0.95\textwidth}
+		
+			\begin{center}
+			%        Separation between image and border
+			\rule{\linewidth}{0.0mm} \\[1.5cm]
+			
+			% Title
+         \textsc{\fontsize{50}{0} \textbf{ \color{TitleColor1}{ \texttt{#1}}} }\\[-0.8cm]
+         \textsc{\fontsize{50}{0} \textbf{ \color{TitleColor2}{ \texttt{#1}}} }\\[-0.8cm]
+         \textsc{\fontsize{50}{0} \textbf{ \color{TitleColor3}{ \texttt{#1}}} }\\
+			% Second title
+			\textsc{\Large{#2}}\\[2.5cm]
+
+
+			% Image
+			\includegraphics[width=0.5\textwidth]{Tux.png}	\\[-10.0cm]
+
+         % Main article
+         \begin{flushright}
+			{ \huge \bfseries {#3}}         
+         \end{flushright}
+			
+			% Content
+			\begin{minipage}
+   			{0.8\textwidth}
+   			\begin{flushleft}
+   			\large {#4}
+   			\end{flushleft}
+			\end{minipage}
+			
+			% End of the page
+			% City and Date
+			\begin{minipage}{0.7\textwidth}
+			      \begin{center} \large {#5} \end{center}			      
+			\end{minipage}
+			% Property
+			\begin{minipage}{0.8\textwidth}
+			   \begin{center} \large {#6} \end{center}
+			\end{minipage}
+			
+			\end{center}		
+		\end{minipage}	
+	\end{center}
+\end{titlepage}
+}
+
+\newcommand{\BytesLibresPortada}[1]
+{
+	\begin{titlepage}
+		% Put something to make the page break work
+		\begin{flushright}
+			{ \huge \bfseries {}}         
+		\end{flushright}
+	
+		\AddToShipoutPictureBG*
+		{
+		    \put(-4,0)
+		    {
+		        \parbox[b][\paperheight]{\paperwidth}
+		        {
+		            \vfill
+		            \centering
+		            \includegraphics[width=\paperwidth,height=\paperheight]{Portada.jpg}
+		            \vfill
+		         }
+		    }
+		}
+	\end{titlepage}
+	\pagebreak[4]
+}
+
+\newcommand{\FigurePage}[1]
+{   
+   \pagebreak[4]
+	% Put something to make the page break work
+	\begin{flushright}
+		{ \huge \bfseries {}}         
+	\end{flushright}
+
+   \thispagestyle{empty}
+   
+	\AddToShipoutPictureBG*
+	{
+	   \thispagestyle{plain}
+	    \put(-4,0)
+	    {
+	        \parbox[b][\paperheight]{\paperwidth}
+	        {
+	            \vfill
+	            \centering
+	            \includegraphics[width=\paperwidth,height=\paperheight]{Portada.jpg}
+	            \vfill
+	         }
+	    }
+	}
+	\pagebreak[4]
+}
+
+
+% % % CHAPTER STUFF
+\addto\captionsspanish{\renewcommand{\chaptername}{GULAG}}
+
+% Colors
+\definecolor{titleTextColor}{RGB}{139,0,0}
+\definecolor{titleBarColor}{RGB}{184,134,11}
+\definecolor{titleAbstract}{RGB}{0,0,0}
+\definecolor{titleAuthor}{RGB}{0,0,128}
+
+% Redefine the command
+\makeatletter									% Enable the use of @ has a letter
+\renewcommand{\@makechapterhead}[1]
+{
+      % Do nothing \Chapter is used instead
+}
+\normalfont																			% Reset font
+\makeatother																		% Disable '@' as character
+
+% \Chapter{Text for ToC}{Text for Article}{Abstract}{Author}
+\DeclareDocumentCommand \Chapter {m m m m g}%
+{
+   \chapter[#2]{#2}						% Title creation for ToC   
+   \normalfont
+   \hspace{.4\textwidth}				% Initial space for text
+   \vspace{-1.25cm}
+   \begin{spacing}{0.85}
+
+      \color{titleBarColor} \centering \rule{0.5\textwidth}{2pt} \vspace{0.0cm}
+            
+      % Title
+      \vspace{0.5cm}
+      \IfValueT {#5} {\includegraphics[height=5.0cm]{#5}}
+      
+      \parbox[t]{0.75 \textwidth} { \centering \fontsize{38}{0} \usefont{OT1}{phv}{b}{n} \color{titleTextColor}{#1} }
+      \normalfont
+      % Abstract
+      \parbox[t]{0.85 \textwidth} { \centering \fontsize{14}{0} \usefont{OT1}{phv}{m}{it} \color{titleAbstract}{#3} }
+      \normalfont
+      % Author
+      \parbox[t]{0.95 \textwidth} { \raggedleft \fontsize{12}{0} \usefont{OT1}{phv}{m}{n} \color{titleAuthor}{#4} 													\vspace{0.5cm}}
+      \normalfont
+      \color{titleBarColor} \centering \rule{0.5\textwidth}{2pt}
+      \normalfont         
+   \end{spacing}
+   \textnormal{}
+}
+
+% % % SECTION STUFF
+\titleformat{\section}{\bf\normalsize\bfseries}{\thesection}{10em}{}{}{}
+
+% % % REMARK STUFF
+\definecolor{RemarkTop}{RGB}{205,133,63}
+\definecolor{RemarkBody}{RGB}{255,215,0}
+\newcommand{\Remark}[2]
+{
+	\begin{center}
+		\fcolorbox{RemarkTop}{RemarkTop}
+		{
+			\begin{minipage}{0.9\columnwidth}
+				\Large 		\bf \textcolor{white}{\ding{228}}
+				\large \bf \textcolor{white}{#1}
+			\end{minipage}	
+		}
+		\\*
+		\vspace{-1pt}
+		\fcolorbox{RemarkTop}{RemarkBody}
+		{
+			\begin{minipage}{0.9\columnwidth}
+				\textcolor{black}{#2}
+			\end{minipage}		
+		\normalfont
+		}
+	\end{center}	
+}
+
+
+% % % CODE STUFF
+\definecolor{CodeTop}{RGB}{192,192,192}
+\definecolor{CodeBody}{RGB}{211,211,211}
+\newcommand{\Code}[2]
+{
+	\begin{center}
+		\fcolorbox{CodeTop}{CodeTop}
+		{
+			\begin{minipage}{0.9\columnwidth}
+				\Large 		\bf \textcolor{white}{\ding{46}}
+				\large \bf \textcolor{white}{#1}
+			\end{minipage}	
+		}
+		\\*
+		\vspace{-1pt}
+		\fcolorbox{CodeTop}{CodeBody}
+		{
+			\begin{minipage}{0.9\columnwidth}	   
+				\textcolor{black}
+				{\fontsize{10}{0}\texttt{#2}}
+			\end{minipage}		
+		\normalfont
+		}
+	\end{center}	
+}
+
+
+% % % FIGURES STUFF
+% % % Colors
+\definecolor{fig_b}{RGB}{160,160,160}
+\definecolor{fig_f}{RGB}{240,240,240}
+
+% % % Command
+\newcommand{\Figure}[5]
+{
+   \begin{center}
+	\fcolorbox{fig_b}{fig_b}
+		{
+			\begin{minipage}{0.9\columnwidth}
+				\color{black}
+				\Large 	\bf 	{\ding{45}}
+				\large	\bf 	{#3}
+			\end{minipage}	
+		}
+		\\*
+		\vspace{-1pt}
+		\fcolorbox{fig_b}{fig_f}
+		{
+			\begin{minipage}{0.9\columnwidth}
+				\begin{center}
+				\includegraphics[width=#1]{#2}\\
+				\normalfont
+				{#4}
+				\end{center}
+			\end{minipage}		
+		\normalfont
+		}
+   \end{center}	
+}
+
+
+% % % TABLE STUFF
+\definecolor{TableColor1}{RGB}{205,133,63}
+\definecolor{TableColor2}{RGB}{255,215,0}
+
+
+% % % % % HEADERS AND FOOTERS
+% % % FOOT NOTES
+\usepackage{perpage} 								% The perpage package
+\MakePerPage{footnote} 								% The perpage package command
+\renewcommand{\thefootnote}{\roman{footnote}}
+\usepackage{endnotes}
+\renewcommand{\notesname}{Referencias:}
+\interfootnotelinepenalty=10000
+
+\makeatletter
+\def\enoteheading{%
+	\section*{%
+		\notesname
+		\@mkboth{\chaptername}{}
+	}%
+	\mbox{}\par\vskip-\baselineskip
+	}
+\makeatother 
+
+
+\usepackage{fancyhdr}
+
+\setlength{\topmargin}{-1.0cm}						% Border of header
+\setlength{\textheight}{21.0cm}						% Font size
+\setlength{\footskip}{2.0cm}							% Border of footer
+\pagestyle{fancyplain}
+\fancypagestyle{fancy}{
+	\fancyhead[LE]{\chaptername}
+}
+\renewcommand{\headrulewidth}{1.0pt}				% Header bar
+\renewcommand{\footrulewidth}{1.0pt}				% Footer bar
+
+% % % Remove bar above footnotes
+\renewcommand{\footnoterule}{%
+  \kern -3pt
+
+  \kern 2pt
+}
+
+\cfoot{\thepage\ de \pageref{LastPage}}       % Center footer
+
+\usepackage{rotating}									% Rotate text in tables
